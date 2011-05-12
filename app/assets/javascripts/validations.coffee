@@ -41,10 +41,11 @@ ns.validate = ->
   validationParams.numeric   = validationParams.inputWrap.hasClass('numeric' )
   validationParams.type      = validationParams.elem.attr("type")
 
-  if validationParams.required
-    ns.required(validationParams)
-  else if validationParams.numeric
-    ns.numeric(validationParams)
+  unless validationParams.elem.hasClass("no-validate")
+    if validationParams.required
+      ns.required(validationParams)
+    else if validationParams.numeric
+      ns.numeric(validationParams)
 
 ns.validateAll = ->
   $("input, textarea").each(ns.validate)
