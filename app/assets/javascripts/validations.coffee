@@ -44,7 +44,6 @@ ns.validate = ->
   unless validationParams.elem.hasClass("no-validate")
     if validationParams.required
       if validationParams.numeric
-        window.vp = validationParams
         ns.numeric(validationParams)
       else
         ns.required(validationParams)
