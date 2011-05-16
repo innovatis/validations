@@ -43,9 +43,10 @@ ns.validate = ->
 
   unless validationParams.elem.hasClass("no-validate")
     if validationParams.required
-      ns.required(validationParams)
-    else if validationParams.numeric
-      ns.numeric(validationParams)
+      if validationParams.numeric
+        ns.numeric(validationParams)
+      else
+        ns.required(validationParams)
 
 ns.validateAll = ->
   $("input, textarea").each(ns.validate)
