@@ -67,5 +67,4 @@ $ ->
   ns.initErrorMessages()
   $('input, textarea').live('focusout', ns.validate)
   $('input, textarea').live("change",   ns.validate)
-  $('input, textarea').live("keydown",  ns.validate)
   $('input, textarea').live("keyup",    ns.validate)
