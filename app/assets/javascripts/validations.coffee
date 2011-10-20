@@ -7,10 +7,10 @@ decimal_regex = /^(\+|-)?[0-9,]+(\.\d*)?$/
 ns.required = (params) ->
   if params.val == ""
     params.inputWrap.find("span.inline-error-message").css('display', 'inline')
-    params.inputWrap.addClass("live-error")
+    params.inputWrap.addClass("field_with_errors")
   else
     params.inputWrap.find("span.inline-error-message").hide()
-    params.inputWrap.removeClass("live-error").removeClass("field_with_errors")
+    params.inputWrap.removeClass("field_with_errors").removeClass("field_with_errors")
 
 ns.numeric = (params) ->
   decimal = params.inputWrap.hasClass("decimal")
@@ -20,17 +20,17 @@ ns.numeric = (params) ->
   if decimal
     if params.val.match(decimal_regex)
       params.inputWrap.find("span.inline-error-message").hide()
-      params.inputWrap.removeClass("live-error").removeClass("field_with_errors")
+      params.inputWrap.removeClass("field_with_errors").removeClass("field_with_errors")
     else
       params.inputWrap.find("span.inline-error-message").css('display', 'inline')
-      params.inputWrap.addClass("live-error")
+      params.inputWrap.addClass("field_with_errors")
   else if integer
     if params.val.match(integer_regex)
       params.inputWrap.find("span.inline-error-message").hide()
-      params.inputWrap.removeClass("live-error").removeClass("field_with_errors")
+      params.inputWrap.removeClass("field_with_errors").removeClass("field_with_errors")
     else
       params.inputWrap.find("span.inline-error-message").css('display', 'inline')
-      params.inputWrap.addClass("live-error")
+      params.inputWrap.addClass("field_with_errors")
 
 ns.validate = ->
   validationParams = {}
@@ -50,7 +50,7 @@ ns.validate = ->
 
 ns.validateAll = ->
   $("input, textarea, select").each(ns.validate)
-  return $(".input.live-error").length < 1
+  return $(".input.field_with_errors").length < 1
 
 ns.initErrorMessages = ->
   $("span.input.required:not(.numeric)").each (ind, elem) ->
