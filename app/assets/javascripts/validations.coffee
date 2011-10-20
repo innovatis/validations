@@ -53,7 +53,7 @@ ns.validateAll = ->
   return $(".input.live-error").length < 1
 
 ns.initErrorMessages = ->
-  $("span.input.required").each (ind, elem) ->
+  $("span.input.required:not(.numeric)").each (ind, elem) ->
     if $(elem).find("span.inline-error-message").size() == 0
       wrap    = $("<span class='inline-error-message-wrapper'></span>")
       message = $("<span class='inline-error-message'>can't be blank</span>").hide()
@@ -61,17 +61,15 @@ ns.initErrorMessages = ->
       $(elem).append(wrap)
 
     else
-      $(elem).find("span.inline-error-message").css('display', 'inline').addClass("required").wrap('<span class="inline-error-message-wrapper"></span>')
+      $(elem).find("span.inline-error-message").addClass("required").wrap('<span class="inline-error-message-wrapper"></span>')
   $("span.input.numeric:not(.select)").each (ind, elem) ->
     if $(elem).find("span.inline-error-message").size() == 0
-      message = $('<span class="inline-error-message-wrapper"><span class="inline-error-message" style="display:inline">is not a number</span></span>').hide()
-      $(elem).append(message)
-
       wrap    = $("<span class='inline-error-message-wrapper'></span>")
-      message = $("<span class='inline-error-message'>is not a number</span>")
-
+      message = $("<span class='inline-error-message'>is not a number</span>").hide()
+      wrap.html(message)
+      $(elem).append(wrap)
     else
-      $(elem).find("span.inline-error-message").css('display', 'inline').addClass("numeric").wrap('<span class="inline-error-message-wrapper"></span>')
+      $(elem).find("span.inline-error-message").addClass("numeric").wrap('<span class="inline-error-message-wrapper"></span>')
 $ ->
   ns.initErrorMessages()
   $('input, textarea, select').live('focusout', ns.validate)
